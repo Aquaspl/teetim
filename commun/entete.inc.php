@@ -1,19 +1,34 @@
 <?php
+    /************** Tableau des langues disponibles *********/
+    $languesDisponibles = [];
+    // Obtenir dynamquement un tableau des langues disponibles
+    $contenuI18n = scandir("i18n");
+    // Parcourir le tableau pour ne garder que les fichiers JSON
+    foreach ($contenuI18n as $nomFichier) {
+        if($nomFichier != "." && $nomFichier != "..") {
+            $languesDisponibles[] = substr($nomFichier, 0, 2);
+        }
+    }
+
+    /************** Interactivité de changement de langue *********/
     // Langue par défaut
     $langue = "fr";
 
     // Si l'utilisateur a déjà choisi une langue dans le passé :
-    if(isset($_COOKIE["langue_choisie"])) {
-        $langue = $_COOKIE["langue_choisie"];
+    // Remarquez la deuxième condition pour se défendre d'une valeur illégitime plantée dans un témoin HTTP (cookie)
+    if(isset($_COOKIE["choixLangue"]) && in_array($_COOKIE["choixLangue"], $languesDisponibles)) {
+        $langue = $_COOKIE["choixLangue"];
     }
 
-    // Si l'utilisateur sélection explicitement une langue :
-    if(isset($_GET["lan"])) {
+    // Si l'utilisateur sélection explicitement une langue
+    // Remarquez la deuxième condition pour se défendre d'une valeur illégitime envoyée dans un paramètre d'URL
+    if(isset($_GET["lan"]) && in_array($_GET["lan"], $languesDisponibles)) {
         $langue = $_GET["lan"];
         // RETENIR CE CHOIX DANS UN COOKIE!
-        setcookie("langue_choisie", $langue, time() + 365*24*3600);
+        setcookie("choixLangue", $langue, time() + 365*24*3600);
     }
 
+    /************** Intégration des textes (externalisation) *********/
     // Étape 1 : Lire le contenu du fichier des textes statiques.
     $textesJson = file_get_contents("i18n/$langue.json");
 
@@ -43,18 +58,41 @@
 <body>
     <div class="conteneur">
         <header>
+            <!-- Navigation barre des langues -->
             <nav class="barre-haut">
                 <!-- 
                     Envoi de paramètres de requête HTTP dans l'URL
                     et donc par la méthode HTTP GET (et non pas POST)
                 -->
-                <a href="?lan=en">en</a>
-                <a href="?lan=fr">fr</a>
+                
+                <!-- Solution 1 : pas désirable (trop de mélange PHP/HTML/PHP) -->
+                <?php
+                    // foreach ($languesDisponibles as $codeLangue) {
+                    //     echo "<a ".(($langue==$codeLangue)?"class='actif'":"")." href='?lan=$codeLangue'>$codeLangue</a>";
+                    // }
+                ?>
+
+                <!-- Solution 2 : plus souhaitable -->
+                <?php foreach($languesDisponibles as $codeLangue) : ?>
+
+                <a 
+                    <?= ($langue==$codeLangue) ? ' class="actif" ' : '' ?> 
+                    href="?lan=<?= $codeLangue; ?>"
+                >
+                    <?= $codeLangue; ?>
+                </a>
+
+                <?php endforeach ?>
             </nav>
             <nav class="barre-logo">
                 <label for="cc-btn-responsive" class="material-icons burger">menu</label>
                 <a class="logo" href="index.php"><img src="images/logo.png" alt="<?= $_ent->logoAlt; ?>"></a>
-                <a class="material-icons panier" href="panier.php">shopping_cart</a>
+                <a 
+                    class="material-icons panier" 
+                    href="panier.php"
+                >
+                    shopping_cart
+                </a>
                 <input class="recherche" type="search" name="motscles" placeholder="<?= $_ent->recherchePlaceholder; ?>">
             </nav>
             <input type="checkbox" id="cc-btn-responsive">
