@@ -1,45 +1,10 @@
 <?php
-    /************** Tableau des langues disponibles *********/
-    $languesDisponibles = [];
-    // Obtenir dynamquement un tableau des langues disponibles
-    $contenuI18n = scandir("i18n");
-    // Parcourir le tableau pour ne garder que les fichiers JSON
-    foreach ($contenuI18n as $nomFichier) {
-        if($nomFichier != "." && $nomFichier != "..") {
-            $languesDisponibles[] = substr($nomFichier, 0, 2);
-        }
-    }
-
-    /************** Interactivité de changement de langue *********/
-    // Langue par défaut
-    $langue = "fr";
-
-    // Si l'utilisateur a déjà choisi une langue dans le passé :
-    // Remarquez la deuxième condition pour se défendre d'une valeur illégitime plantée dans un témoin HTTP (cookie)
-    if(isset($_COOKIE["choixLangue"]) && in_array($_COOKIE["choixLangue"], $languesDisponibles)) {
-        $langue = $_COOKIE["choixLangue"];
-    }
-
-    // Si l'utilisateur sélection explicitement une langue
-    // Remarquez la deuxième condition pour se défendre d'une valeur illégitime envoyée dans un paramètre d'URL
-    if(isset($_GET["lan"]) && in_array($_GET["lan"], $languesDisponibles)) {
-        $langue = $_GET["lan"];
-        // RETENIR CE CHOIX DANS UN COOKIE!
-        setcookie("choixLangue", $langue, time() + 365*24*3600);
-    }
-
-    /************** Intégration des textes (externalisation) *********/
-    // Étape 1 : Lire le contenu du fichier des textes statiques.
-    $textesJson = file_get_contents("i18n/$langue.json");
-
-    // Étape 2 : Convertir la chaîne JSON obtenue en 1 en un tableau PHP
-    $textes = json_decode($textesJson);
-
-    // Étape 3 : Définir des raccourcis pour accéder aux textes des différentes parties de la page
-    $_ent = $textes->entete;
-    $_pp = $textes->pied2page;
-    $_ = $textes->$page;
-    
+include("lib/i18n.lib.php");
+$languesDisponibles = obtenirlanguedisonible();
+// Déterminer la langue d'affichage
+$langue = determinerlangue($languesDisponibles);
+//TEXTE statiques
+[$_ent, $_pp, $_] = cherchertextes($langue, $page);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
