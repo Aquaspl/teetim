@@ -1,39 +1,40 @@
 <?php
+// ATTENTION : TOUTE fonction doit avoir un commentaire de type JavaDoc (PHPDoc)
+
 /**
- * obtiens la liste des langues disponibles
+ * Obtient la liste des codes de langues disponibles sur le site.
  * 
- * @return array tableau des codes de langues disponibles (ex. ["fr","en","es"])
+ * @return array Tableau des codes de langues en 2 lettres. 
  */
-function obtenirlanguedisonible() {
-    /************** Tableau des langues disponibles *********/
-    $languesDisponibles = [];
-    // Obtenir dynamquement un tableau des langues disponibles
+function obtenirLanguesDisponibles() {
+    $langues = [];
     $contenuI18n = scandir("i18n");
-    // Parcourir le tableau pour ne garder que les fichiers JSON
     foreach ($contenuI18n as $nomFichier) {
-        if($nomFichier != "." && $nomFichier != "..") {
-            $languesDisponibles[] = substr($nomFichier, 0, 2);
+        if ($nomFichier != "." && $nomFichier != "..") {
+            $langues[] = substr($nomFichier, 0, 2);
         }
     }
-    return $languesDisponibles;
+    return $langues;
 }
+
 /**
- * determiner la langue d'affichage du site
+ * Détermine la langue d'affichage du site.
  * 
- * @param array $languesDisponibles tableau des codes de langues disponibles (ex. ["fr","en","es"])
- * @return string code de la langue choisie (ex. "fr")
+ * @param array $languesPermises Tableau des langues disponibles.
+ * 
+ * @return string Code de la langue à utiliser.
  */
-function determinerlangue($languespermises) {
+function determinerLangue($languesPermises) {
     // Langue par défaut
     $langue = "fr";
 
-    // Étape 1 : Vérifier si l'utilisateur a déjà fait un choix de langue
-    if(isset($_COOKIE["choixLangue"]) && in_array($_COOKIE["choixLangue"], $languespermises)) {
+    // Valeur de langue sauvgardée en cookie
+    if(isset($_COOKIE["choixLangue"]) && in_array($_COOKIE["choixLangue"], $languesPermises)) {
         $langue = $_COOKIE["choixLangue"];
     }
 
-    // Étape 2 : Vérifier si l'utilisateur vient de faire un choix de langue
-    if(isset($_GET["lan"]) && in_array($_GET["lan"], $languespermises)) {
+    // Valeur de langue arrivée en paramètre URL
+    if(isset($_GET["lan"]) && in_array($_GET["lan"], $languesPermises)) {
         $langue = $_GET["lan"];
         // RETENIR CE CHOIX DANS UN COOKIE!
         setcookie("choixLangue", $langue, time() + 365*24*3600);
@@ -43,22 +44,27 @@ function determinerlangue($languespermises) {
 }
 
 /**
- * cherche les textes statiques
- * @param string $codelangue code de la langue choisie (ex. "fr")
- * @return array tableau des textes
- * @param string $page nom de la page courante (ex. "accueil", "teeshirts", "casquettes", etc.)
+ * Obtient les textes statiques de la page à partir du fichier JSON 
+ * adéquat.
+ * 
+ * @param string $codeLangue Code de la langue.
+ * @param string $nomPage Nom de la page requise.
+ * 
+ * @return array Tableau contenant des raccourcis pour les textes de 
+ *               l'entête, du pied de page et du contenu spécifique de 
+ *               la page. 
  */
-function cherchertextes($codelangue, $page) {
-    // Étape 1 : Lire le contenu du fichier des textes statiques.
-    $textesJson = file_get_contents("i18n/$codelangue.json");
+function obtenirTextesStatiques($codeLangue, $nomPage) {
+    // Lire le contenu du fichier des textes statiques.
+    $textesJson = file_get_contents("i18n/$codeLangue.json");
 
-    // Étape 2 : Convertir la chaîne JSON obtenue en 1 en un tableau PHP
-    $textes = json_decode($textesJson, true);
-     // Étape 3 : Définir des raccourcis pour accéder aux textes des différentes parties de la page
-    $_ent = $textes->entete;
-    $_pp = $textes->pied2page;
-    $_ = $textes->$page;
+    // Convertir la chaîne JSON obtenue en un tableau PHP.
+    $textes = json_decode($textesJson);
 
-    return [$_ent, $_pp, $_];
+    // Définir et retourner des raccourcis utiles.
+    return [
+            $textes->entete, 
+            $textes->pied2page, 
+            $textes->$nomPage
+        ];
 }
-?>

@@ -24,8 +24,8 @@
         "droits": "All rights reserved, teeTIM"
     },
     "accueil": {
-        "metaTitre": "TeeTIM - Home",
-        "metaDesc": "",
+        "metaTitre": "teeTIM // natural fibers... artificial design",
+        "metaDesc": "Homepage of the designer of 100% Quebec-made clothing, designed by TIM students using AI-generated designs, and made with 100% natural and organic fibers.",
         "heroTitre": "T-shirts, hoodies, and caps made in Quebec 💯",
         "heroSousTitre": "Designed at TIM with ❤️",
         "heroSousTitre2": "/** with a little help from DALL-E 😉 **/",
@@ -42,6 +42,24 @@
         "metaTitre": "TeeTIM - Our caps",
         "metaDesc": "",
         "titrePage": "Our caps",
+        "enConstruction": "Coming soon..."
+    },
+    "hoodies": {
+        "metaTitre": "TeeTIM - Our hoodies",
+        "metaDesc": "",
+        "titrePage": "Our hoodies",
+        "enConstruction": "Coming soon..."
+    },
+    "aide": {
+        "metaTitre": "TeeTIM - Help",
+        "metaDesc": "",
+        "titrePage": "Help",
+        "enConstruction": "Coming soon..."
+    },
+    "apropos": {
+        "metaTitre": "TeeTIM - About us",
+        "metaDesc": "",
+        "titrePage": "About us",
         "enConstruction": "Coming soon..."
     }
 }

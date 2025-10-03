@@ -142,13 +142,14 @@ nav.principale a.actif {
     border-bottom: 3px solid var(--clr-fond-actif);
 }
 
-/* Main */
+/* Main : Toutes les pages */
 main {
     flex-grow: 1;
     width: 95vw;
     margin: 2rem auto;
 }
 
+/* Main : Page d'accueil */
 main.page-accueil .amorce {
     background-image: url(../images/accueil.jpg);
     background-size: cover;
@@ -170,6 +171,67 @@ main.page-accueil .amorce h2 {
 main.page-accueil .principal {
     margin: 1rem auto;
     width: 90vw;
+}
+
+/* Main : Page Teeshirts/Casquettes/Hoodies */
+main.page-produits .amorce {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+main.page-produits .amorce .controle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+main.page-produits .amorce .controle > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+main.page-produits .amorce .controle select {
+    margin-left: 0.5rem;
+    padding: 0.5rem 3rem 0.5rem 0.5rem;
+    border-radius: 1rem;
+}
+
+/* TP/Volet 1 : Mobile */
+main.page-produits .principal {
+    width: 90vw;
+    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+main.page-produits .principal .produit {
+    width: 20%;
+    min-width: 15rem;
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main.page-produits .principal .produit .nom {
+    text-align: center;
+}
+
+main.page-produits .principal .produit .prix {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+main.page-produits .principal .produit .image img {
+    width: 100%;
 }
 
 /* Pied de page */
@@ -265,6 +327,18 @@ footer .da {
     main.page-accueil .principal {
         margin: 1rem auto;
         width: 70vw;
+    }
+
+    /* Page Teeshirts */
+    main.page-produits .amorce .controle {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 0.75rem;
+    }
+
+    main.page-produits .amorce .controle > div {
+        margin: 0 1rem;
     }
 
     footer div.contenu {

@@ -1,10 +1,17 @@
 <?php
-include("lib/i18n.lib.php");
-$languesDisponibles = obtenirlanguedisonible();
-// Déterminer la langue d'affichage
-$langue = determinerlangue($languesDisponibles);
-//TEXTE statiques
-[$_ent, $_pp, $_] = cherchertextes($langue, $page);
+    // Inclure la librairie de code i18n
+    include("lib/i18n.lib.php");
+
+    // Tableau des langues disponibles
+    $languesDisponibles = obtenirLanguesDisponibles();
+
+    // Langue à utiliser pour l'affichage.
+    $langue = determinerLangue($languesDisponibles);
+
+    // Textes statiques.
+    // Remarquez l'"affectation par destructuration" (destructuring assignment)
+    [$_ent, $_pp, $_] = obtenirTextesStatiques($langue, $page);
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,8 +22,8 @@ $langue = determinerlangue($languesDisponibles);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>teeTIM // fibre naturelle ... conception artificielle</title>
-    <meta name="description" content="Page d'accueil du concepteur de vêtements 100% fait au Québec, conçus par les étudiants du TIM à l'aide de designs produits par intelligence artificielle, et fabriqués avec des fibres 100% naturelles et biologiques.">
+    <title><?= $_->metaTitre; ?></title>
+    <meta name="description" content="<?= $_->metaDesc; ?>">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
@@ -62,7 +69,12 @@ $langue = determinerlangue($languesDisponibles);
             </nav>
             <input type="checkbox" id="cc-btn-responsive">
             <nav class="principale">
-                <label for="cc-btn-responsive" class="menu-controle material-icons">close</label>
+                <label 
+                    for="cc-btn-responsive" 
+                    class="menu-controle material-icons"
+                >
+                    close
+                </label>
                 <a <?= ($page=="teeshirts") ? ' class="actif" ' : '' ?> href="teeshirts.php"><?= $_ent->menuTeeshirts; ?></a>
                 <a <?= ($page=="casquettes") ? ' class="actif" ' : '' ?> href="casquettes.php"><?= $_ent->menuCasquettes; ?></a>
                 <a href="hoodies.php"><?= $_ent->menuHoodies; ?></a>

@@ -24,8 +24,8 @@
         "droits": "Tous droits réservés, teeTIM"
     },
     "accueil": {
-        "metaTitre": "TeeTIM - Accueil",
-        "metaDesc": "",
+        "metaTitre": "teeTIM // fibre naturelle ... conception artificielle",
+        "metaDesc": "Page d'accueil du concepteur de vêtements 100% fait au Québec, conçus par les étudiants du TIM à l'aide de designs produits par intelligence artificielle, et fabriqués avec des fibres 100% naturelles et biologiques.",
         "heroTitre": "Teeshirts, hoodies, et casquettes fabriqués au Québec 💯",
         "heroSousTitre": "Conçus au TIM avec ❤️",
         "heroSousTitre2": "/** avec un p'tit peu d'aide de DALL-E 😉 **/",
@@ -34,15 +34,33 @@
     },
     "teeshirts": {
         "metaTitre": "TeeTIM - Nos teeshirts",
-        "metaDesc": "",
+        "metaDesc": "Description à venir pour la page teeshirts...",
         "titrePage": "Nos teeshirts",
         "enConstruction": "À venir..."
     }
     ,
     "casquettes": {
         "metaTitre": "TeeTIM - Nos casquettes",
-        "metaDesc": "",
+        "metaDesc": "Description à venir pour la page casquettes...",
         "titrePage": "Nos casquettes",
+        "enConstruction": "À venir..."
+    },
+    "hoodies": {
+        "metaTitre": "TeeTIM - Nos hoodies",
+        "metaDesc": "Description à venir pour la page hoodies...",
+        "titrePage": "Nos hoodies",
+        "enConstruction": "À venir..."
+    },
+    "aide": {
+        "metaTitre": "TeeTIM - Aide",
+        "metaDesc": "Description à venir pour la page aide...",
+        "titrePage": "Aide",
+        "enConstruction": "À venir..."
+    },
+    "apropos": {
+        "metaTitre": "TeeTIM - À propos de nous",
+        "metaDesc": "Description à venir pour la page à propos de nous...",
+        "titrePage": "À propos de nous",
         "enConstruction": "À venir..."
     }
 }
