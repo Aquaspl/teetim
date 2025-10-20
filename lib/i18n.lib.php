@@ -65,6 +65,7 @@ function obtenirTextesStatiques($codeLangue, $nomPage) {
     return [
             $textes->entete, 
             $textes->pied2page, 
-            $textes->$nomPage
+            $textes->$nomPage,
+            $textes->catalogue
         ];
 }

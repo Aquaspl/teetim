@@ -10,7 +10,7 @@
 
     // Textes statiques.
     // Remarquez l'"affectation par destructuration" (destructuring assignment)
-    [$_ent, $_pp, $_] = obtenirTextesStatiques($langue, $page);
+    [$_ent, $_pp, $_, $_cat] = obtenirTextesStatiques($langue, $page);
     
 ?>
 <!DOCTYPE html>
@@ -26,6 +26,7 @@
     <meta name="description" content="<?= $_->metaDesc; ?>">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <div class="conteneur">

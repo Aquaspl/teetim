@@ -1,6 +1,6 @@
 {
 	"animaux": {
-		"nomCat": {
+		"theme": {
 			"fr": "Animaux",
 			"en": "Animals"
 		},
@@ -48,7 +48,7 @@
 		]
 	},
 	"inusite": {
-		"nomCat": {
+		"theme": {
 			"fr": "Inusité",
 			"en": "Unusual"
 		},
@@ -66,7 +66,7 @@
 		]
 	},
 	"sport": {
-		"nomCat": {
+		"theme": {
 			"fr": "Sport",
 			"en": "Sport"
 		},
@@ -84,7 +84,7 @@
 		]
 	},
 	"nature": {
-		"nomCat": {
+		"theme": {
 			"fr": "Nature",
 			"en": "Nature"
 		},
@@ -112,7 +112,7 @@
 		]
 	},
 	"jv": {
-		"nomCat": {
+		"theme": {
 			"fr": "Jeux vidéo",
 			"en": "Video Games"
 		},
